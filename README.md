@@ -1,10 +1,8 @@
-# Theatrify
+# Theatrify🎭
 
 [![Visits Badge](https://badges.pufler.dev/visits/nightsailor/theatrify)](https://badges.pufler.dev)
 
 So this is our submission for the TheHacktrical hackathon!
-
-# Theatrify🎭
 
 ### Inspiration🔭
 Everything was going great. Then Covid hit! Every industry got disrupted but few were affected the most. Theatre was one of them. So we wanted to do something so that we could bring this industry back on track! So we created Theatrify. 
