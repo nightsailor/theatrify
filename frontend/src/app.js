@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignInEntryPoint from "./signin/app";
-import SignUpEntryPoint from "./signup/app";
+import SignInEntryPoint from "./pages/signin/app";
+import SignUpEntryPoint from "./pages/signup/app";
+import Performance from "./pages/performance/app";
+import App from "./pages/home/App";
 
 const Switcher = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" exact element={<SignUpEntryPoint />} />
+        <Route path="/" exact element={<App />} />
+        <Route path="/performance" exact element={<Performance />} />
         <Route path="/signup" exact element={<SignUpEntryPoint />} />
 
         <Route path="/signin" exact element={<SignInEntryPoint />} />

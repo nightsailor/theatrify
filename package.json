@@ -13,16 +13,25 @@
     "quick": "npm run build && npm run start-server"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.2",
+    "aos": "^2.3.4",
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
+    "bootstrap": "^5.1.3",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "generate-password": "^1.7.0",
+    "jquery": "^3.6.0",
     "mongoose": "^6.1.7",
     "morgan": "^1.10.0",
     "react": "^17.0.2",
+    "react-app-polyfill": "^3.0.0",
+    "react-bootstrap": "^2.1.1",
     "react-dom": "^17.0.2",
     "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.2.1",
+    "react-scroll": "^1.8.4",
+    "styled-components": "^5.3.3"
   }
 }

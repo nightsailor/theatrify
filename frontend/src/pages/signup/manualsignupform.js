@@ -1,6 +1,7 @@
 import { useState } from "react";
-import passwordStrengthChecker from "../common/passwordstrengthcheck";
-import { ProgressBarFlexible } from "../common/progresscomponent";
+import axios from "axios";
+import passwordStrengthChecker from "../../common/passwordstrengthcheck";
+import { ProgressBarFlexible } from "../../common/progresscomponent";
 import { generateMultiple, generate } from "generate-password";
 import { useNavigate } from "react-router-dom";
 import img from './2.png'
@@ -39,16 +40,17 @@ const SignUpFormContainer = () => {
     setsignupForm({ ...signupForm, [e.target.name]: e.target.value });
   };
 
-  const submitForm = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setconfirmPasswordErrorMsg("Password does not match");
-    } else {
-      if (email && password && confirmPassword) {
-        setconfirmPasswordErrorMsg("");
-        setsuccessMsg("Sign up Successful");
-      }
+    // setError(false);
+    try {
+      const res = await axios.post("/api/auth/register", {
+        email,
+        password,
+      });
+      res.data && window.location.replace("/login");
+    } catch (err) {
+      console.log(err)
     }
   };
 
