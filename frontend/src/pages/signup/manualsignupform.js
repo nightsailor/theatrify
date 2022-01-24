@@ -40,21 +40,34 @@ const SignUpFormContainer = () => {
     setsignupForm({ ...signupForm, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setError(false);
-    try {
-      const res = await axios.post("/api/auth/register", {
-        email,
-        password,
-      });
-      res.data && window.location.replace("/login");
-    } catch (err) {
-      console.log(err)
+
+    if (password !== confirmPassword) {
+
+      setconfirmPasswordErrorMsg("Password does not match");
+    } else if (email && password && confirmPassword) {
+
+      try {
+        const res = await axios.post("/api/auth/register", {
+          email,
+          password,
+        });
+        if (res.data) {
+          setconfirmPasswordErrorMsg("");
+          setsuccessMsg("Sign up Successful");
+          // navigate("/signin");
+        }
+      } catch (err) {
+        console.log(err)
+        setconfirmPasswordErrorMsg("Something went wrong!");
+      }
     }
   };
 
-  const navigate = useNavigate();
+  
 
   return (
     <div className="container py-5 h-100 background-container">
@@ -93,7 +106,7 @@ const SignUpFormContainer = () => {
                     </div>
                   )}
 
-                  <form action="/api/auth/register" method="POST">
+                  <form>
                     {/* Heading */}
                     <div className="d-flex align-items-center mb-3 pb-1">
                       <span className="h1 fw-bold mb-0 text-white card-name">
@@ -218,7 +231,7 @@ const SignUpFormContainer = () => {
                       <button
                         className="btn mb-2 mb-md-0 btn-block w-100 submit-btn text-white fs-5"
                         type="submit"
-                        
+                        onClick={handleSubmit}
                       >
                         Signup
                       </button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router";
 import passwordStrengthChecker from "../../common/passwordstrengthcheck";
 import { ProgressBarFlexible } from "../../common/progresscomponent";
@@ -6,6 +7,7 @@ import img from './1.png';
 
 const SignInFormContainer = () => {
   const [percentage, setpercentage] = useState(0);
+  const [successMsg, setsuccessMsg] = useState();
 
   // For Handling Eye-shield of two password-field
   const handleEyeOnOff = (inputClass, eyeClass) => {
@@ -24,6 +26,27 @@ const SignInFormContainer = () => {
   };
 
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let email = document.getElementById("form2Example17").value;
+    let password = document.getElementById("form2Example27").value;
+    console.log(email, password)
+    if (email && password) {
+
+      try {
+        const res = await axios.post("/api/auth/login", {
+          email,
+          password,
+        });
+        res.data && navigate("/");
+      } catch (err) {
+        console.log(err);
+        setsuccessMsg("Invalid username or password!");
+      }
+    }
+  };
 
   return (
     <div className="container py-5 h-100 background-container">
@@ -44,7 +67,15 @@ const SignInFormContainer = () => {
               </div>
               <div className="col-md-6 col-lg-7 d-flex align-items-center">
                 <div className="card-body p-4 p-lg-5 text-black">
-                  <form action="/api/auth/login" method="POST">
+                {successMsg && (
+                    <div
+                      className="p-3 mb-3 text-center text-white"
+                      style={{ background: "#B4161B" }}
+                    >
+                      <h4>{successMsg}</h4>
+                    </div>
+                  )}
+                  <form>
                     {/* Heading */}
                     <div className="d-flex align-items-center mb-3 pb-1">
                       <span className="h1 fw-bold mb-0 text-white card-name">
@@ -100,6 +131,7 @@ const SignInFormContainer = () => {
                       <button
                         className="btn mb-2 mb-md-0 btn-block w-100 submit-btn text-white fs-5"
                         type="submit"
+                        onClick={handleSubmit}
                       >
                         Signin
                       </button>
